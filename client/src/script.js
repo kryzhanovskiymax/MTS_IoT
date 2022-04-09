@@ -6,14 +6,28 @@ let time_change = 500     // life time of figure
 let index_img = 0         // array iterator
 let timerID               // timeout
 let objRequest
-let images = [1,2,1,2,2,3,1,2,3,2,1]
+let images;
 
-const circle = '<svg><circle cx="150" cy="150" r="100"/></svg>'
+const circle = '<svg><circle stroke="black" stroke-width="5px" fill="rgb(100, 240, 20)" cx="150" cy="150" r="100"/></svg>'
 const square = '<svg><rect x="50" y="40" width="200" height="200"/></svg>'
 const triangle = '<svg><polygon points="150 40, 70 220, 230 220"/></svg>'
 
+const palette = ["blue", "red"]
+
+const createCircle = (color) => {
+  return `<svg><circle fill="${color}" cx="150" cy="150" r="100"/></svg>`
+}
+
+const createSquare = (color) => {
+
+}
+
+const createTriangle = (color) => {
+
+}
+
 const element = document.getElementById('test_img_hole')
-const requestURL = 'http::localhost:3040/api'
+const requestURL = '/api'
 
 /*
     FUNCTIONS
@@ -78,30 +92,37 @@ const runTest = () => {
 // objRequest = sendRequest('GET', requestURL+'/test')
 // objRequest.data(response => {return response.json()})
 
-let body = {
-  id: 1
-}
-
-sendRequest('GET', requestURL+'/test', body)
-  .then(data => {images = data.test})
 
 // sendRequest('POST', requestURL, body)
 //   .then(data => console.log(data))
 //   .catch(err => console.log(err))
+/*btn_gen.onclick = function() {
+  sendRequest('GET', requestURL+'/test', {id: 1});
+}*/
+
+btn_gen.onclick = function() {
+    fetch(requestURL + '/test', {id: 1})
+            .then(async data => {
+              const data_json = await data.json();
+              images = data_json.test;
+              alert(images);
+            })
+            .catch(e => console.log(e));
+}
 
 btn_run.onclick = runTest
 
 btn_1.onclick = function() {
-  sendRequest('POST', requestURL+'/test', {click_type: 1})
+  sendRequest('POST', requestURL+'/test/res', {click_type: 1})
     .then(data => console.log(data))
 }
 
 btn_2.onclick = function() {
-  sendRequest('POST', requestURL+'/test', {click_type: 2})
+  sendRequest('POST', requestURL+'/test/res', {click_type: 2})
     .then(data => console.log(data))
 }
 
 btn_3.onclick = function() {
-  sendRequest('POST', requestURL+'/test', {click_type: 3})
+  sendRequest('POST', requestURL+'/test/res', {click_type: 3})
     .then(data => console.log(data))
 }

@@ -38,7 +38,6 @@ const updateUserDataStart = async(user_id, day, start) => {
 
 const updateUserDataEnd = async(user_id, day, start) => {
     try {
-        console.log(day);
         const response = await pool.query('UPDATE user_data SET end_time=$1 WHERE user_id = $2 AND day=$3', [start, user_id, day]);
         return response;
     } catch(e) {

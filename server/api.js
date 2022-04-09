@@ -63,10 +63,12 @@ router.get('/', async (req, res) => {
 //START button clicked
 router.post('/', async (req, res) => {
     try {
+        
         const { id } = req.body;
+        console.log(JSON.stringify(req.body));
         const result = await updateUserDataStart(id, toDate(new Date()), toTime(new Date()));
         
-        res.send(200).json({message: "test started"});
+        res.status(200).json({message: "test started"});
         return result
     } catch(e) {
         res.status(400).json({error: e.message})
@@ -77,11 +79,11 @@ router.post('/', async (req, res) => {
 router.post('/res', async (req, res) => {
     try {
         const { click_type } = req.body;
-        const result = await insertClickIntoAnswers(123, Int(click_type), toTime(new Date()));
-        res.send(200).message({message: "OK"});
+        const result = await insertClickIntoAnswers(123, click_type, toTime(new Date()));
+        res.status(200).json({message: "OK"});
         return result;
     } catch(e) {
-        res.send(400).json({error: e.message});
+        res.status(400).json({error: e.message});
     }
 });
 
@@ -91,7 +93,7 @@ router.put('/', async (req, res) => {
         const { id } = req.body;
         const result = await updateUserDataEnd(id, toDate(new Date()), toTime(new Date()));
     } catch(e) {
-        return res.send(400).json({error: e.message});
+        return res.status(400).json({error: e.message});
     }
 });
 
