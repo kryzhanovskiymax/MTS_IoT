@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakaton</title>
+
+    <!--подключение собственных стилей-->
+    <link rel="stylesheet" href="./src/style.css">
+
+    <!--подключение BOOTSTRAP-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <!--привествие и краткое описание-->
+        <div class="container-fluid">
+            <h1>Когнитивные исследования</h1>
+            <p>от вас требуется только внимательность и ваша концентрация</p>
+        </div>
+
+        <!--вывод картинок-->
+        <div class="container-fluid">
+            <div class="test_img" id="test_img_hole" width="300px" height="300px"></div>
+        </div>
+        <button type="button" class="btn btn-success" id="btn_gen">GEN test</button>
+        <button type="button" class="btn btn-success" id="btn_run">RUN test</button>
+
+        <button type="button" class="btn btn-primary" id="btn_1">Одно нажатие</button>
+        <button type="button" class="btn btn-primary" id="btn_2">Два нажатия</button>
+        <button type="button" class="btn btn-primary" id="btn_3">Удержание</button>
+    </main>
+    <footer>
+        
+    </footer>
+    <script src="./src/script.js"></script>
+</body>
+</html>
