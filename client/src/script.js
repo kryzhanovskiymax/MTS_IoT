@@ -5,8 +5,8 @@
 let time_change = 500     // life time of figure
 let index_img = 0         // array iterator
 let timerID               // timeout
-let images                // array of figures
 let objRequest
+let images = [1,2,1,2,2,3,1,2,3,2,1]
 
 const circle = '<svg><circle cx="150" cy="150" r="100"/></svg>'
 const square = '<svg><rect x="50" y="40" width="200" height="200"/></svg>'
@@ -25,9 +25,9 @@ async function sendRequest(method, url, body = null) {
     method: method,
     body: JSON.stringify(body),
     headers: headers
-  }).then(response => {
+  }).then(async (response) => {
     if (response.ok){
-      return response.json()
+      return await response.json()
     }
     return response.json().then(error => {
       const e = new Error('Ошибка!')
@@ -51,11 +51,20 @@ function changeImages() {
   }
 }
 
-const game = () => {
-// нажимаем на кнопку, SetInterval по увеличению индекса
+function CountDown() {
+  let count_d = 3
+  
+  let timer_down = setInterval(() => {
+      element.innerHTML = count_d
+      count_d -= 1
+      if (count_d === 0) {
+          clearInterval(timer_down)
+      }
+  }, 1000)
+}
 
-  if (index_img === images.length - 1) {
-    clearInterval(timerID)
+const runTest = () => {
+  timerID = setInterval(changeImages, time_change, index_img)
 }
 
 /*
@@ -65,32 +74,34 @@ const game = () => {
     3. При каждом нажатии кнопки отправлять POST-запрос на сервер (эмуляции работы физической кнопки)
 */
 
-// всегда подавать день старта
-objRequest = sendRequest('GET', requestURL+'/test')
-objRequest.data(response => {return response.json()})
+// // всегда подавать день старта
+// objRequest = sendRequest('GET', requestURL+'/test')
+// objRequest.data(response => {return response.json()})
 
 let body = {
-
+  id: 1
 }
 
-sendRequest('POST', requestURL, body)
-  .then(data => console.log(data))
-  .catch(err => console.log(err))
+sendRequest('GET', requestURL+'/test', body)
+  .then(data => {images = data.test})
 
-const runTest = () => {
-    timerID = setInterval(changeImages, time_change, index_img)
-}
+// sendRequest('POST', requestURL, body)
+//   .then(data => console.log(data))
+//   .catch(err => console.log(err))
 
-btn_run.onclick = game
+btn_run.onclick = runTest
 
 btn_1.onclick = function() {
-
+  sendRequest('POST', requestURL+'/test', {click_type: 1})
+    .then(data => console.log(data))
 }
 
 btn_2.onclick = function() {
-
+  sendRequest('POST', requestURL+'/test', {click_type: 2})
+    .then(data => console.log(data))
 }
 
 btn_3.onclick = function() {
-
+  sendRequest('POST', requestURL+'/test', {click_type: 3})
+    .then(data => console.log(data))
 }
