@@ -1,0 +1,11 @@
+.test_img {
+    height: 300px;
+    width: 300px;
+    background-image: url('./imgs/triangle.png');
+    background-size: cover;
+    display: inline-block;
+}
+
+main {
+    text-align: center;
+}
