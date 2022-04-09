@@ -1,0 +1,34 @@
+{
+  "name": "iot",
+  "version": "1.0.0",
+  "description": "IoT MTS Hackathon",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kryzhanovskiymax/MTS_IoT.git"
+  },
+  "keywords": [
+    "Internet",
+    "of",
+    "Things"
+  ],
+  "author": "Maxim Kryzhanovskiy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kryzhanovskiymax/MTS_IoT/issues"
+  },
+  "homepage": "https://github.com/kryzhanovskiymax/MTS_IoT#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "concurrently": "^7.1.0",
+    "nodemon": "^2.0.15"
+  }
+}
