@@ -26,6 +26,14 @@ app.get('/', (req, res) => {
     }
 });
 
+app.post('/button', (req, res) => {
+    try {
+        console.log('Everything is fine');
+    } catch (e) {
+        console.log(e)
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`Server has started on the PORT ${PORT}`);
 })

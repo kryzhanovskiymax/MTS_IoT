@@ -9,50 +9,28 @@ const {
     insertAllResults,
     getUserAllResults
 } = require('./database/db.js');
+
+const { 
+    toDate,
+    toTime
+} = require('./database/stats.js')
 const { Router } = require('express');
 
-const toDate = (date) => {
-    let day = date.getDate().toString();
-    if (day.length == 1) {
-        day = '0' + day;
-    }
 
-    let month = (date.getMonth() + 1).toString();
-    if (month.length == 1) {
-        month = '0' + month;
-    }
-
-
-    return `${date.getFullYear()}-${day}-${month}`;
-}
-
-const toTime = (date) => {
-    let hours = date.getHours();
-    if (hours.length == 1) {
-        hours = '0' + hours;
-    }
-
-    let minutes = date.getMinutes();
-    if (minutes.length == 1) {
-        minutes = '0' + minutes;
-    }
-
-    let seconds = date.getMinutes();
-    if (seconds.length == 1) {
-        seconds = '0' + seconds;
-    }
-    return `${toDate(date)} ${hours}:${minutes}:${seconds}`;
-}
 
 const router = Router();
 
 //GENERATE button clicked
-router.get('/', async (req, res) => {
+router.post('/generator', async (req, res) => {
     try {
         const { id } = req.body;
-        const user_insertion = await insertUserIntoUserData(id, null, 1, toDate(new Date()), null, null);
-        const test_arr = [1, 2, 2, 3, 3, 2, 2, 2, 1, 1];
-        const test_id = Math.floor(Math.random() * 1000);
+        const test_id = Math.floor(Math.random() * 10000);
+        console.log(id);
+        const user_insertion = await insertUserIntoUserData(id, test_id, 234, toDate(new Date()), null, null);
+        let test_arr = [];
+        for (let i = 0; i < 15; ++i) {
+            test_arr[i] = Math.floor(Math.random() * 3) + 1;
+        }
         const test_insertion = await insertIdealResults(test_id, test_arr);
         res.status(200).json({test: test_arr});
     } catch(e) {
@@ -92,6 +70,7 @@ router.put('/', async (req, res) => {
     try {
         const { id } = req.body;
         const result = await updateUserDataEnd(id, toDate(new Date()), toTime(new Date()));
+        res.status(200).json({message: "Test ended"});
     } catch(e) {
         return res.status(400).json({error: e.message});
     }

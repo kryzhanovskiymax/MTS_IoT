@@ -6,6 +6,8 @@
     display: inline-block;
 }
 
+
+
 svg {
     height: 100%;
     width: 100%;
@@ -13,4 +15,20 @@ svg {
 
 main {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu button {
+    margin-left: 3px;
+    margin-right: 3px;
 }

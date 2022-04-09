@@ -2,28 +2,42 @@
     PREPAREMENTS
 */
 
-let time_change = 500     // life time of figure
+let time_change = 2000     // life time of figure
 let index_img = 0         // array iterator
 let timerID               // timeout
 let objRequest
 let images;
+let user_id = 1;
+
+/*
+
+
+
+*/
 
 const circle = '<svg><circle stroke="black" stroke-width="5px" fill="rgb(100, 240, 20)" cx="150" cy="150" r="100"/></svg>'
 const square = '<svg><rect x="50" y="40" width="200" height="200"/></svg>'
 const triangle = '<svg><polygon points="150 40, 70 220, 230 220"/></svg>'
 
-const palette = ["blue", "red"]
+const palette = ["blue", "red", "brown", 
+            "blueviolet", "bisque", "dodgerblue", 
+            "indigo", "firebrick", "gold", "darkmagenta", "yellowgreen"]
 
 const createCircle = (color) => {
-  return `<svg><circle fill="${color}" cx="150" cy="150" r="100"/></svg>`
+  return `<svg><circle fill="${color}" stroke="black" stroke-width="5px" cx="150" cy="150" r="100"/></svg>`
 }
-
+            
 const createSquare = (color) => {
-
+  return `<svg><rect fill="${color}" stroke="black" stroke-width="5px" x="50" y="40" width="200" height="200"/></svg>`
+}
+            
+const createTriangle = (color) => {
+  return `<svg><polygon fill="${color}" points="150 40, 55 210, 245 210"/></svg>`
 }
 
-const createTriangle = (color) => {
-
+const formElement = document.getElementById("form-user-id");
+formElement.onchange = function(id) {
+  user_id = id;
 }
 
 const element = document.getElementById('test_img_hole')
@@ -52,16 +66,19 @@ async function sendRequest(method, url, body = null) {
 }
 
 function changeImages() {
-  console.log('WIN')
+  let randomColor = palette[Math.floor(Math.random()*palette.length)]
+
   switch (images[index_img]) {
-      case 1: {element.innerHTML = circle; break}
-      case 2: {element.innerHTML = square; break}
-      case 3: {element.innerHTML = triangle; break}
+    case 1: {element.innerHTML = createCircle(randomColor); break}
+    case 2: {element.innerHTML = createSquare(randomColor); break}
+    case 3: {element.innerHTML = createTriangle(randomColor); break}
   }
   index_img += 1
 
   if (index_img === images.length - 1) {
-      clearInterval(timerID)
+      clearInterval(timerID);
+      element.innerHTML = "<h3>Test is finished</h3>"
+      sendRequest('PUT', requestURL + '/test', {id: user_id});
   }
 }
 
@@ -78,7 +95,13 @@ function CountDown() {
 }
 
 const runTest = () => {
-  timerID = setInterval(changeImages, time_change, index_img)
+  sendRequest('POST' ,requestURL + '/test', {id: user_id} )
+    .then((data) => {
+      timerID = setInterval(changeImages, time_change, index_img);
+    })
+    .catch(e => {
+      console.log(e);
+    })
 }
 
 /*
@@ -101,11 +124,16 @@ const runTest = () => {
 }*/
 
 btn_gen.onclick = function() {
-    fetch(requestURL + '/test', {id: 1})
+    fetch(requestURL + '/test/generator', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: user_id })
+      })
             .then(async data => {
               const data_json = await data.json();
               images = data_json.test;
-              alert(images);
             })
             .catch(e => console.log(e));
 }

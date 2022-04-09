@@ -69,7 +69,11 @@ const insertClickIntoAnswers = async (button_id, answer, time) => {
 
 const insertIdealResults = async (test_id, answers) => {
     try {
-        const result = await pool.query('INSERT INTO ideal_results (test_id, ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9, ans10) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [test_id, answers[0], answers[1], answers[2], answers[3], answers[4], answers[5], answers[6], answers[7], answers[8], answers[9]]);
+        const result = await pool.query('INSERT INTO ideal_results (test_id, ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9, ans10, ans11, ans12, ans13, ans14, ans15) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)', 
+                    [test_id, answers[0], answers[1], answers[2], 
+                    answers[3], answers[4], answers[5], answers[6], 
+                    answers[7], answers[8], answers[9], answers[10], 
+                    answers[11], answers[12], answers[13], answers[14]]);
         return result;
     } catch(e) {
         return e;
