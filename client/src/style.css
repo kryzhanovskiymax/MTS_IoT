@@ -1,9 +1,14 @@
 #test_img_hole {
     height: 300px;
     width: 300px;
-    background-image: url('./imgs/triangle.png');
+    /* background-image: url('./imgs/triangle.png'); */
     background-size: cover;
     display: inline-block;
+}
+
+svg {
+    height: 100%;
+    width: 100%;
 }
 
 main {
