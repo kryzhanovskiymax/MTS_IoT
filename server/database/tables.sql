@@ -3,8 +3,8 @@ CREATE TABLE user_data (
     test_id INTEGER,
     button_id INTEGER,
     day DATE,
-    start_time TEXT,
-    end_time TEXT
+    start_time TIMESTAMP,
+    end_time TIMESTAMP
 );
 
 CREATE TABLE ideal_results (
@@ -24,7 +24,7 @@ CREATE TABLE ideal_results (
 CREATE TABLE answers (
     button_id INTEGER,
     answer INTEGER,
-    time TEXT
+    time DATE
 );
 
 CREATE TABLE all_res (
