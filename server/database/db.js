@@ -1,8 +1,16 @@
 const { Pool } = require('pg');
-const pool = new Pool({
+/*const pool = new Pool({
     user: 'master',
     host: 'iot.c8bve5z3jaxz.us-east-1.rds.amazonaws.com',
     database: 'postgres',
+    password: 'password',
+    port: 5432
+});*/
+
+const pool = new Pool({
+    user: 'makskryzhanovskiy',
+    host: 'localhost',
+    database: 'makskryzhanovskiy',
     password: 'password',
     port: 5432
 });
@@ -105,8 +113,9 @@ const insertAllResults = async (user_id, day, time_spent, fails) => {
 const getUserAllResults = async (user_id, day) => {
     try {
         const result = await pool.query('SELECT time_spent, fails FROM all_res WHERE user_id=$1 AND day=$2', [user_id, day]);
+        return result;
     } catch(e) {
-
+        return e;
     }
 }
 

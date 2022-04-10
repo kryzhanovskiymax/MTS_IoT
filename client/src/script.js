@@ -35,10 +35,10 @@ const createTriangle = (color) => {
   return `<svg><polygon fill="${color}" points="150 40, 55 210, 245 210"/></svg>`
 }
 
-const formElement = document.getElementById("form-user-id");
+/*const formElement = document.getElementById("form-user-id");
 formElement.onchange = function(id) {
   user_id = id;
-}
+}*/
 
 const element = document.getElementById('test_img_hole')
 const requestURL = '/api'

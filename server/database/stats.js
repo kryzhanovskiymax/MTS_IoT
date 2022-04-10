@@ -27,7 +27,7 @@ const toDate = (date) => {
     }
 
 
-    return `${date.getFullYear()}-${day}-${month}`;
+    return `${date.getFullYear()}-${month}-${day}`;
 }
 
 const toTime = (date) => {
