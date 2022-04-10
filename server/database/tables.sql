@@ -18,7 +18,12 @@ CREATE TABLE ideal_results (
     ans7 INTEGER,
     ans8 INTEGER,
     ans9 INTEGER,
-    ans10 INTEGER
+    ans10 INTEGER,
+    ans11 INTEGER,
+    ans12 INTEGER,
+    ans13 INTEGER,
+    ans14 INTEGER,
+    ans15 INTEGER
 );
 
 CREATE TABLE answers (

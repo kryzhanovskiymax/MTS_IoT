@@ -1,9 +1,9 @@
 const { Pool } = require('pg');
 const pool = new Pool({
-    user: process.env.PG_USER,
-    host: process.env.PG_HOST,
-    database: process.env.PG_DATABASE,
-    password: process.env.PG_PASSWORD,
+    user: 'master',
+    host: 'iot.c8bve5z3jaxz.us-east-1.rds.amazonaws.com',
+    database: 'postgres',
+    password: 'password',
     port: 5432
 });
 
@@ -14,6 +14,10 @@ pool.connect((err, client, release) => {
         console.log('Connection to database is succesful');
     }
 });
+
+/*pool.query('INSERT INTO user_data (user_id, test_id, button_id) VALUES($1, $2, $3)', [100, 200, 300])
+        .then(() => console.log('fine'))
+        .catch((e) => console.log(e));*/
 
 const insertUserIntoUserData = async (user_id, test_id, button_id, day, start, end) => {
         try {

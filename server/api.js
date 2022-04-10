@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
         const { id } = req.body;
         console.log(JSON.stringify(req.body));
         const result = await updateUserDataStart(id, toDate(new Date()), toTime(new Date()));
-        
+        console.log(result);
         res.status(200).json({message: "test started"});
         return result
     } catch(e) {
