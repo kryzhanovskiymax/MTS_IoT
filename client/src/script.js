@@ -2,7 +2,7 @@
     PREPAREMENTS
 */
 
-let time_change = 2000     // life time of figure
+let time_change = 800     // life time of figure
 let index_img = 0         // array iterator
 let timerID               // timeout
 let objRequest

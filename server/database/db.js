@@ -1,19 +1,19 @@
 const { Pool } = require('pg');
-const pool = new Pool({
+/*const pool = new Pool({
     user: 'master',
     host: 'iot.c8bve5z3jaxz.us-east-1.rds.amazonaws.com',
     database: 'postgres',
     password: 'password',
     port: 5432
-});
+});*/
 
-/*const pool = new Pool({
+const pool = new Pool({
     user: 'makskryzhanovskiy',
     host: 'localhost',
     database: 'makskryzhanovskiy',
     password: 'password',
     port: 5432
-});*/
+});
 
 pool.connect((err, client, release) => {
     if (err) {
