@@ -2,13 +2,14 @@
     PREPAREMENTS
 */
 
-let time_change = 2000     // life time of figure
+let time_change = 800     // life time of figure
 let index_img = 0         // array iterator
 let timerID               // timeout
 let objRequest
 let images;
+let correctAnswers = 0;
+let flag = false;
 let user_id = 1;
-
 /*
 
 
@@ -65,6 +66,14 @@ async function sendRequest(method, url, body = null) {
   })
 }
 
+function printMessage() {
+  if (correctAnswers <= Math.floor(images.length*0.7)) {
+    return "You're Tired! Get some rest."
+  } else {
+    return "Congartulations! Test Passed."
+  }
+}
+
 function changeImages() {
   let randomColor = palette[Math.floor(Math.random()*palette.length)]
 
@@ -74,10 +83,10 @@ function changeImages() {
     case 3: {element.innerHTML = createTriangle(randomColor); break}
   }
   index_img += 1
-
+  flag = false
   if (index_img === images.length - 1) {
       clearInterval(timerID);
-      element.innerHTML = "<h3>Test is finished</h3>"
+      element.innerHTML = `<h3>Test is finished</h3><h2> Correct answers: ${correctAnswers}/${images.length}</h2><h3>${printMessage()}</h3>`
       sendRequest('PUT', requestURL + '/test', {id: user_id});
   }
 }
@@ -141,16 +150,19 @@ btn_gen.onclick = function() {
 btn_run.onclick = runTest
 
 btn_1.onclick = function() {
+  if (images[index_img] === 1 && not (flag)) {correctAnswers+=1; flag = true}
   sendRequest('POST', requestURL+'/test/res', {click_type: 1})
     .then(data => console.log(data))
 }
 
 btn_2.onclick = function() {
+  if (images[index_img] === 2 && not (flag)) {correctAnswers+=1; flag = true}
   sendRequest('POST', requestURL+'/test/res', {click_type: 2})
     .then(data => console.log(data))
 }
 
 btn_3.onclick = function() {
+  if (images[index_img] === 3 && not (flag)) {correctAnswers+=1; flag = true}
   sendRequest('POST', requestURL+'/test/res', {click_type: 3})
     .then(data => console.log(data))
 }
